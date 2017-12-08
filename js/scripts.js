@@ -5,6 +5,7 @@ function searchCountries(e){
   e.preventDefault();
 
   let countryName = document.getElementById('country-name').value;
+  const subHead = document.getElementById('sub-header');
 
   if(!countryName.length) {
     countryName = 'Poland';
@@ -15,29 +16,35 @@ function searchCountries(e){
 
   xhr.onload = function(){
     if(this.status == 200){
-      console.log(this.responseText);
+      // console.log(this.responseText);
 
       let countries = JSON.parse(this.responseText);
 
       var output = '';
       for(let i in countries){
-        for(let cur in countries[i].currencies){
+        for(let k in countries[i].currencies){
           output +=
-            `<h2>List of selected countries</h2>
-            <ul>
-            <li>Name: ${countries[i].name}</li>
-            <li>Native Name: ${countries[i].nativeName}</li>
-            <li>Country code: ${countries[i].alpha2Code}</li>
-            <li>Flag: <img src="${countries[i].flag}" style="width:150px;"></li>
-            <li>Capital: ${countries[i].capital}</li>
-            <li>Region: ${countries[i].region}</li>
-            <li>Subregion: ${countries[i].subregion}</li>
-            <li>Population: ${countries[i].population}</li>
-            <li>Currency: ${countries[i].currencies[cur].name} (${countries[i].currencies[cur].code})</li>
-            </ul>`;
+            `
+            <div class="country">
+            <div class="ctr-flag"><img src="${countries[i].flag}"></div>
+            <div class="ctr-name-wrapper">
+              <h3>Name: ${countries[i].name}</h3>
+              <p>Native Name: ${countries[i].nativeName}</p>
+              <p>Country code: ${countries[i].alpha2Code}</p>
+            </div>
+            <p class="ctr-cap">Capital: ${countries[i].capital}</p>
+            <div class="ctr-reg-wrapper">
+              <p class="ctr-reg">Region: ${countries[i].region}</p>
+              <p class="ctr-subreg">Subregion: ${countries[i].subregion}</p>
+            </div>
+            <p class="ctr-pop">Population: ${countries[i].population}</p>
+            <p class="ctr-cur">Currency: ${countries[i].currencies[k].name} (${countries[i].currencies[k].code})</p>
+            </div>
+            `;
         }
       }
-      document.getElementById('countries').innerHTML = output;
+      subHead.classList.remove('hidden');
+      document.getElementById('countries-wrapper').innerHTML = output;
     }
   }
 

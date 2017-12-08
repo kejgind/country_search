@@ -8,17 +8,21 @@
   <title>AJAX - Country search</title>
 </head>
 <body>
+<div class="container">
 
-  <h1>Country search engine</h1>
-  <p>The results are displayed thanks to <a href="https://restcountries.eu/" target="_blank">REST Countries</a> </p>
-  <form id="getForm">
-    <input id="country-name" type="text">
-    <input type="submit" id="search" value="Search a country">
+  <h1 class="main-header">Country search engine</h1>
+  <p class="lead-text">The results are displayed thanks to <a href="https://restcountries.eu/" target="_blank" class="btn btn-rest">REST Countries</a> </p>
+
+  <form id="getForm" class="form">
+    <input id="country-name" type="text" class="form-field" placeholder=" e.g. Poland">
+    <input type="submit" id="search" value="Search a country" class="btn btn-form">
   </form>
-  <div id="countries">
+  <h2 id="sub-header" class="sub-header hidden">List of selected countries:</h2>
+  <div id="countries-wrapper" class="countries-wrapper">
 
   </div>
 
+</div>
 
   <script type="text/javascript" src="js/scripts.js"></script>
 </body>
